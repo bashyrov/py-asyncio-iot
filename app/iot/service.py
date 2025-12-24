@@ -35,9 +35,10 @@ class IOTService:
     def get_device(self, device_id: str) -> Device:
         return self.devices[device_id]
 
-    async def run_program(self, program: list[Message], func_) -> None:
+    async def run_program(self, program: list[Message]) -> None:
         print("=====RUNNING PROGRAM======")
-        await func_(*[self.send_msg(msg) for msg in program])
+        for msg in program:
+            await self.send_msg(msg)
         print("=====END OF PROGRAM======")
 
     async def send_msg(self, msg: Message) -> None:
